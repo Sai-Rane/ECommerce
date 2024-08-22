@@ -1,0 +1,8 @@
+.cards-cnt{
+    border: 1px solid black;
+}
+
+.cards-cnt{
+    width: 100%;
+    max-width: 750px;
+}
