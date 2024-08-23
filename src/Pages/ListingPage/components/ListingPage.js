@@ -6,8 +6,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const ListingPage = () => {
+  //state to filter products
+
+  const [searchProd, setSearchProd] = useState("");
   //state to store the productData
   const [products, setProducts] = useState([]);
+  const [afterFilter, setAfterFilter] = useState([]);
   const settings = {
     dots: true,
     infinite: true,
@@ -22,15 +26,36 @@ const ListingPage = () => {
     const data = await productData.json();
     console.log("data", data.products);
     setProducts(data?.products);
+    setAfterFilter(data?.products);
   };
   console.log("products", products);
+
+  const handleFilterProd = () => {
+    console.log("searchProd", searchProd);
+    // const filtered = products.filter((ele) => ele?.title.includes(searchProd));
+    // setSearchProd(filtered);
+    const filter = products.filter((ele) => ele.rating > 4.8);
+    setProducts(filter);
+  };
 
   useEffect(() => {
     apiProducts();
   }, []);
-  return (
+
+  return products.length === 0 ? (
+    <h1>Loading Products...</h1>
+  ) : (
     <div>
       <h1>Listing page</h1>
+      <div>
+        <input
+          value={searchProd}
+          placeholder="Enter Product name"
+          onChange={(e) => setSearchProd(e.target.value)}
+        />
+        <button>Search Product</button>
+      </div>
+      <button onClick={handleFilterProd}>Filter Products</button>
 
       {/* {products.map((ele) => {
         return (
@@ -40,11 +65,11 @@ const ListingPage = () => {
           </div>
         );
       })} */}
-      <Slider {...settings}>
-        {products.map((ele, i) => {
-          return <ProductCard productDetails={ele} key={i + 1} />;
-        })}
-      </Slider>
+      {/* <Slider {...settings}> */}
+      {products.map((ele, i) => {
+        return <ProductCard productDetails={ele} key={i + 1} />;
+      })}
+      {/* </Slider> */}
     </div>
   );
 };
