@@ -38,6 +38,14 @@ const ListingPage = () => {
     setProducts(filter);
   };
 
+  const handleSearchProd = () => {
+    const search = products.filter((ele) =>
+      ele?.title?.toLowerCase().includes(searchProd.toLowerCase())
+    );
+    setAfterFilter(search);
+    setSearchProd("");
+  };
+
   useEffect(() => {
     apiProducts();
   }, []);
@@ -53,7 +61,7 @@ const ListingPage = () => {
           placeholder="Enter Product name"
           onChange={(e) => setSearchProd(e.target.value)}
         />
-        <button>Search Product</button>
+        <button onClick={handleSearchProd}>Search Product</button>
       </div>
       <button onClick={handleFilterProd}>Filter Products</button>
 
@@ -66,7 +74,7 @@ const ListingPage = () => {
         );
       })} */}
       {/* <Slider {...settings}> */}
-      {products.map((ele, i) => {
+      {afterFilter.map((ele, i) => {
         return <ProductCard productDetails={ele} key={i + 1} />;
       })}
       {/* </Slider> */}
