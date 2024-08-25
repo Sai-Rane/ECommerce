@@ -21,10 +21,11 @@ import "./App.css";
 import ListingPage from "./Pages/ListingPage/components/ListingPage";
 import DetailPage from "./Pages/DetailPage/components/DetailPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Error from "./Pages/Error/Error";
 
 // Define the router first
 const appRouter = createBrowserRouter([
-  { path: "/", element: <ListingPage /> },
+  { path: "/", element: <ListingPage />, errorElement: <Error /> },
   { path: "/detail", element: <DetailPage /> },
 ]);
 
