@@ -22,11 +22,14 @@ const DetailPage = () => {
         <img src={prod?.thumbnail} />
       </div>
       <h1>{prod?.title}</h1>
-      <h3>
-        Product Brand: <span>{prod?.brand}</span>
-      </h3>
+      {prod?.brand && (
+        <h3>
+          Product Brand: <span>{prod?.brand}</span>
+        </h3>
+      )}
       <h3>Rating: {prod?.rating}</h3>
       <h3>Warranty: {prod?.warrantyInformation}</h3>
+      <h3>Product Description: {prod?.description}</h3>
     </>
   );
 };

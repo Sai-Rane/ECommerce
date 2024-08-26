@@ -4,8 +4,6 @@ import ProductCard from "../../ProductCards/ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
-
 const ListingPage = () => {
   //state to filter products
 
@@ -76,9 +74,7 @@ const ListingPage = () => {
       })} */}
       {/* <Slider {...settings}> */}
       {afterFilter.map((ele, i) => (
-        <Link to={"/detail/" + ele.id}>
-          <ProductCard productDetails={ele} key={i + 1} />
-        </Link>
+        <ProductCard productDetails={ele} key={i + 1} />
       ))}
       {/* </Slider> */}
     </div>
