@@ -4,6 +4,7 @@ import ProductCard from "../../ProductCards/ProductCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 const ListingPage = () => {
   //state to filter products
@@ -28,14 +29,14 @@ const ListingPage = () => {
     setProducts(data?.products);
     setAfterFilter(data?.products);
   };
-  console.log("products", products);
+  console.log("products", afterFilter);
 
   const handleFilterProd = () => {
     console.log("searchProd", searchProd);
     // const filtered = products.filter((ele) => ele?.title.includes(searchProd));
     // setSearchProd(filtered);
     const filter = products.filter((ele) => ele.rating > 4.8);
-    setProducts(filter);
+    setAfterFilter(filter);
   };
 
   const handleSearchProd = () => {
@@ -74,9 +75,11 @@ const ListingPage = () => {
         );
       })} */}
       {/* <Slider {...settings}> */}
-      {afterFilter.map((ele, i) => {
-        return <ProductCard productDetails={ele} key={i + 1} />;
-      })}
+      {afterFilter.map((ele, i) => (
+        <Link to={"/detail/" + ele.id}>
+          <ProductCard productDetails={ele} key={i + 1} />
+        </Link>
+      ))}
       {/* </Slider> */}
     </div>
   );
